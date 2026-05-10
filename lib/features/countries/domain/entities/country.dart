@@ -29,8 +29,7 @@ class Country extends Equatable {
   final String flagSvgUrl;
   final String flagPngUrl;
 
-  // cca2 is the stable unique identifier — two Country objects with the same
-  // code are the same country regardless of other field values
+  // cca2 is the stable unique identifier
   @override
   List<Object?> get props => [cca2];
 }
