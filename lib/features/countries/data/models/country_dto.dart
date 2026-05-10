@@ -61,9 +61,7 @@ class CountryDto {
   final List<String>? capital;
   final int? population;
   final double? area;
-  // API returns Map<currencyCode, CurrencyDto> — e.g. {"USD": {"name": "...", "symbol": "$"}}
   final Map<String, CurrencyDto>? currencies;
-  // API returns Map<langCode, langName> — e.g. {"eng": "English"}
   final Map<String, String>? languages;
 
   factory CountryDto.fromJson(Map<String, dynamic> json) =>
