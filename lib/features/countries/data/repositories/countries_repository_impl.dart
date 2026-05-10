@@ -10,12 +10,17 @@ class CountriesRepositoryImpl implements CountriesRepository {
   const CountriesRepositoryImpl({
     required CountriesRemoteDatasource remoteDataSource,
     required NetworkInfo networkInfo,
-  })  : _remoteDataSource = remoteDataSource;
+  })  : _remoteDataSource = remoteDataSource,
+        _networkInfo = networkInfo;
 
   final CountriesRemoteDatasource _remoteDataSource;
+  final NetworkInfo _networkInfo;
 
   @override
   Future<Either<Failure, List<Country>>> getAllCountries() async {
+    if (!await _networkInfo.isConnected) {
+      return const Left(NetworkFailure());
+    }
     try {
       final dtos = await _remoteDataSource.getAllCountries();
       final countries = dtos.map((d) => d.toDomain()).toList()
@@ -30,6 +35,9 @@ class CountriesRepositoryImpl implements CountriesRepository {
 
   @override
   Future<Either<Failure, Country>> getCountryByCode(String cca2) async {
+    if (!await _networkInfo.isConnected) {
+      return const Left(NetworkFailure());
+    }
     try {
       final dto = await _remoteDataSource.getCountryByCode(cca2);
       return Right(dto.toDomain());
