@@ -9,7 +9,7 @@ abstract final class AppTheme {
     ),
   );
 
-  static const navigationBarTheme = const NavigationBarThemeData(elevation: 0);
+  static const navigationBarTheme = NavigationBarThemeData(elevation: 0);
 
   static ThemeData get light => ThemeData(
         useMaterial3: true,

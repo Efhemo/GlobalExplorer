@@ -8,7 +8,7 @@ abstract final class AppConstants {
 
   // Limits REST Countries payload from ~800KB to ~80KB
   static const countriesFields =
-      'cca2,name,capital,region,subregion,population,area,currencies,languages,flags,latlng,timezones';
+      'cca2,name,capital,region,subregion,population,area,currencies,languages,flags';
 
   static const unsplashPhotosPerPage = 8;
   static const newsPageSize = 10;

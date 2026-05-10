@@ -1,0 +1,20 @@
+sealed class AppException implements Exception {
+  const AppException(this.message);
+  final String message;
+
+  @override
+  String toString() => '$runtimeType: $message';
+}
+
+final class ServerException extends AppException {
+  const ServerException(super.message, {this.statusCode});
+  final int? statusCode;
+}
+
+final class NetworkException extends AppException {
+  const NetworkException([super.message = 'No internet connection']);
+}
+
+final class CacheException extends AppException {
+  const CacheException([super.message = 'Local cache error']);
+}
