@@ -9,6 +9,9 @@ import '../../features/countries/domain/repositories/countries_repository.dart';
 import '../../features/countries/domain/usecases/search_countries.dart';
 import '../../features/countries/presentation/blocs/countries_list/countries_list_bloc.dart';
 import '../../features/countries/presentation/blocs/country_search/country_search_cubit.dart';
+import '../../features/favorites/data/repositories/favorites_repository_impl.dart';
+import '../../features/favorites/domain/repositories/favorites_repository.dart';
+import '../../features/favorites/presentation/cubit/favorites_cubit.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
 
@@ -42,4 +45,10 @@ Future<void> configureDependencies() async {
   sl.registerLazySingleton(SearchCountries.new);
   sl.registerFactory(() => CountriesListBloc(repository: sl()));
   sl.registerFactory(() => CountrySearchCubit(searchCountries: sl()));
+
+  // Favorites feature
+  sl.registerLazySingleton<FavoritesRepository>(
+        () => FavoritesRepositoryImpl(sl()),
+  );
+  sl.registerFactory(() => FavoritesCubit(repository: sl()));
 }

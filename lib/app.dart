@@ -7,6 +7,7 @@ import 'core/theme/app_theme.dart';
 import 'features/countries/presentation/blocs/countries_list/countries_list_bloc.dart';
 import 'features/countries/presentation/blocs/countries_list/countries_list_event.dart';
 import 'features/countries/presentation/blocs/country_search/country_search_cubit.dart';
+import 'features/favorites/presentation/cubit/favorites_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
               sl<CountriesListBloc>()..add(const CountriesListFetchRequested()),
         ),
         BlocProvider(create: (_) => sl<CountrySearchCubit>()),
+        BlocProvider(create: (_) => sl<FavoritesCubit>()),
       ],
       child: MaterialApp.router(
         title: 'Global Explorer',
