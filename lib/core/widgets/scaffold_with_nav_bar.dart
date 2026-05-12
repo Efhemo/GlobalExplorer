@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../constants/app_constants.dart';
+import '../theme/app_colors.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({super.key, required this.navigationShell});
@@ -10,7 +11,11 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   static const _destinations = [
     (icon: Icons.explore_outlined, selected: Icons.explore, label: 'Explore'),
-    (icon: Icons.favorite_outline, selected: Icons.favorite, label: 'Favorites'),
+    (
+      icon: Icons.favorite_outline,
+      selected: Icons.favorite,
+      label: 'Favorites',
+    ),
   ];
 
   void _onTap(int index) {
@@ -40,7 +45,6 @@ class ScaffoldWithNavBar extends StatelessWidget {
     );
   }
 }
-
 
 class _BottomNavLayout extends StatelessWidget {
   const _BottomNavLayout({
@@ -73,7 +77,6 @@ class _BottomNavLayout extends StatelessWidget {
   }
 }
 
-
 class _SideNavLayout extends StatelessWidget {
   const _SideNavLayout({
     required this.navigationShell,
@@ -101,33 +104,33 @@ class _SideNavLayout extends StatelessWidget {
               splashFactory: NoSplash.splashFactory,
             ),
             child: NavigationRail(
-            extended: extended,
-            useIndicator: false,
-            selectedIndex: navigationShell.currentIndex,
-            onDestinationSelected: onTap,
-            labelType: extended
-                ? NavigationRailLabelType.none
-                : NavigationRailLabelType.selected,
-            selectedIconTheme: const IconThemeData(
-              color: Color(0xFF1A6EBD),
-              size: 24,
+              extended: extended,
+              useIndicator: false,
+              selectedIndex: navigationShell.currentIndex,
+              onDestinationSelected: onTap,
+              labelType: extended
+                  ? NavigationRailLabelType.none
+                  : NavigationRailLabelType.selected,
+              selectedIconTheme: const IconThemeData(
+                color: AppColors.primary,
+                size: 24,
+              ),
+              selectedLabelTextStyle: const TextStyle(
+                color: AppColors.primary,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.4,
+              ),
+              destinations: [
+                for (final d in destinations)
+                  NavigationRailDestination(
+                    icon: Icon(d.icon),
+                    selectedIcon: Icon(d.selected),
+                    label: Text(d.label),
+                  ),
+              ],
             ),
-            selectedLabelTextStyle: const TextStyle(
-              color: Color(0xFF1A6EBD),
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0.4,
-            ),
-            destinations: [
-              for (final d in destinations)
-                NavigationRailDestination(
-                  icon: Icon(d.icon),
-                  selectedIcon: Icon(d.selected),
-                  label: Text(d.label),
-                ),
-            ],
-          ),         // close NavigationRail
-          ),         // close Theme
+          ),
           const VerticalDivider(width: 1, thickness: 1),
           Expanded(child: navigationShell),
         ],
