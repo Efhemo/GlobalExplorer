@@ -16,6 +16,8 @@ final sl = GetIt.instance;
 
 Future<void> configureDependencies() async {
   // Infrastructure
+  sl.registerLazySingleton(AppDatabase.new);
+  sl.registerLazySingleton(() => sl<AppDatabase>().favoritesDao);
   sl.registerLazySingleton(Connectivity.new);
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
