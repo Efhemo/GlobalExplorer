@@ -81,6 +81,7 @@ class _LoadedBody extends StatelessWidget {
                       onTap: () => context.pushNamed(
                         RouteNames.exploreDetail,
                         pathParameters: {'cca2': country.cca2},
+                        extra: country,
                       ),
                     );
                   },

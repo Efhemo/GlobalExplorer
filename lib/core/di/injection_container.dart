@@ -74,5 +74,11 @@ Future<void> configureDependencies() async {
   sl.registerLazySingleton<NewsRepository>(
     () => NewsRepositoryImpl(sl()),
   );
-
+  sl.registerFactory(
+    () => CountryDetailCubit(
+      imagesRepository: sl(),
+      newsRepository: sl(),
+      favoritesRepository: sl(),
+    ),
+  );
 }

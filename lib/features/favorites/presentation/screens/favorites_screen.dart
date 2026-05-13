@@ -37,6 +37,7 @@ class FavoritesScreen extends StatelessWidget {
                 onTap: () => context.pushNamed(
                   RouteNames.favoritesDetail,
                   pathParameters: {'cca2': country.cca2},
+                  extra: country,
                 ),
               );
             },
