@@ -9,6 +9,15 @@ import '../../features/countries/domain/repositories/countries_repository.dart';
 import '../../features/countries/domain/usecases/search_countries.dart';
 import '../../features/countries/presentation/blocs/countries_list/countries_list_bloc.dart';
 import '../../features/countries/presentation/blocs/country_search/country_search_cubit.dart';
+import '../../features/country_detail/data/datasources/images_remote_datasource.dart';
+import '../../features/country_detail/data/datasources/images_remote_datasource_impl.dart';
+import '../../features/country_detail/data/datasources/news_remote_datasource.dart';
+import '../../features/country_detail/data/datasources/news_remote_datasource_impl.dart';
+import '../../features/country_detail/data/repositories/images_repository_impl.dart';
+import '../../features/country_detail/data/repositories/news_repository_impl.dart';
+import '../../features/country_detail/domain/repositories/images_repository.dart';
+import '../../features/country_detail/domain/repositories/news_repository.dart';
+import '../../features/country_detail/presentation/cubit/country_detail_cubit.dart';
 import '../../features/favorites/data/repositories/favorites_repository_impl.dart';
 import '../../features/favorites/domain/repositories/favorites_repository.dart';
 import '../../features/favorites/presentation/cubit/favorites_cubit.dart';
@@ -48,7 +57,22 @@ Future<void> configureDependencies() async {
 
   // Favorites feature
   sl.registerLazySingleton<FavoritesRepository>(
-        () => FavoritesRepositoryImpl(sl()),
+    () => FavoritesRepositoryImpl(sl()),
   );
   sl.registerFactory(() => FavoritesCubit(repository: sl()));
+
+  // Country detail feature
+  sl.registerLazySingleton<ImagesRemoteDatasource>(
+    () => ImagesRemoteDatasourceImpl(sl(instanceName: 'unsplash')),
+  );
+  sl.registerLazySingleton<ImagesRepository>(
+    () => ImagesRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton<NewsRemoteDatasource>(
+    () => NewsRemoteDatasourceImpl(sl(instanceName: 'news')),
+  );
+  sl.registerLazySingleton<NewsRepository>(
+    () => NewsRepositoryImpl(sl()),
+  );
+
 }

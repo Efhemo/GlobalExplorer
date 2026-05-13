@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/errors/exceptions.dart';
+import '../../../../core/network/dio_exception_ext.dart';
 import '../models/country_dto.dart';
 import 'countries_remote_datasource.dart';
 
@@ -21,7 +21,7 @@ class CountriesRemoteDatasourceImpl implements CountriesRemoteDatasource {
           .map((json) => CountryDto.fromJson(json as Map<String, dynamic>))
           .toList();
     } on DioException catch (e) {
-      _handleDioError(e);
+      e.toAppException();
     }
   }
 
@@ -31,18 +31,7 @@ class CountriesRemoteDatasourceImpl implements CountriesRemoteDatasource {
       final response = await _dio.get<Map<String, dynamic>>('/alpha/$cca2');
       return CountryDto.fromJson(response.data!);
     } on DioException catch (e) {
-      _handleDioError(e);
+      e.toAppException();
     }
-  }
-
-  Never _handleDioError(DioException e) {
-    if (e.type == DioExceptionType.connectionError ||
-        e.type == DioExceptionType.connectionTimeout) {
-      throw const NetworkException();
-    }
-    throw ServerException(
-      e.message ?? 'Unexpected server error',
-      statusCode: e.response?.statusCode,
-    );
   }
 }
