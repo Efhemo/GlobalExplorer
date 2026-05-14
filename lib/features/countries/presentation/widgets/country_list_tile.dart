@@ -24,20 +24,24 @@ class CountryListTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           children: [
-            Hero(
-              tag: 'flag-explore-${country.cca2}',
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: CachedNetworkImage(
-                  imageUrl: country.flagPngUrl,
-                  width: 52,
-                  height: 40,
-                  fit: BoxFit.cover,
-                  errorWidget: (_, _, _) => Container(
-                    width: 50,
-                    height: 40,
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    child: const Icon(Icons.flag, size: 20),
+            Semantics(
+              label: '${country.commonName} flag',
+              image: true,
+              child: Hero(
+                tag: 'flag-explore-${country.cca2}',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: CachedNetworkImage(
+                    imageUrl: country.flagPngUrl,
+                    width: 52,
+                    height: 36,
+                    fit: BoxFit.cover,
+                    errorWidget: (_, _, _) => Container(
+                      width: 52,
+                      height: 36,
+                      color: theme.colorScheme.surfaceContainerHighest,
+                      child: const Icon(Icons.flag_outlined, size: 20),
+                    ),
                   ),
                 ),
               ),

@@ -24,14 +24,18 @@ class FavoriteCountryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: Hero(
-                tag: 'flag-favorites-${country.cca2}',
-                child: CachedNetworkImage(
-                  imageUrl: country.flagPngUrl,
-                  fit: BoxFit.cover,
-                  errorWidget: (_, _, _) => Container(
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    child: const Icon(Icons.flag_outlined),
+              child: Semantics(
+                label: '${country.commonName} flag',
+                image: true,
+                child: Hero(
+                  tag: 'flag-favorites-${country.cca2}',
+                  child: CachedNetworkImage(
+                    imageUrl: country.flagPngUrl,
+                    fit: BoxFit.cover,
+                    errorWidget: (_, _, _) => Container(
+                      color: theme.colorScheme.surfaceContainerHighest,
+                      child: const Icon(Icons.flag_outlined),
+                    ),
                   ),
                 ),
               ),

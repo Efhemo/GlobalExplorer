@@ -122,14 +122,18 @@ class _DetailScaffold extends StatelessWidget {
                   shadows: [Shadow(blurRadius: 4, color: Colors.black54)],
                 ),
               ),
-              background: Hero(
-                tag: heroTag,
-                child: CachedNetworkImage(
-                  imageUrl: country.flagPngUrl,
-                  fit: BoxFit.cover,
-                  errorWidget: (_, _, _) => Container(
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    child: const Icon(Icons.flag_outlined, size: 48),
+              background: Semantics(
+                label: '${country.commonName} flag',
+                image: true,
+                child: Hero(
+                  tag: heroTag,
+                  child: CachedNetworkImage(
+                    imageUrl: country.flagPngUrl,
+                    fit: BoxFit.cover,
+                    errorWidget: (_, _, _) => Container(
+                      color: theme.colorScheme.surfaceContainerHighest,
+                      child: const Icon(Icons.flag_outlined, size: 48),
+                    ),
                   ),
                 ),
               ),
