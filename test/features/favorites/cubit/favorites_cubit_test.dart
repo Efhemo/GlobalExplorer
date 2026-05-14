@@ -10,8 +10,7 @@ import 'package:global_explorer/features/favorites/presentation/cubit/favorites_
 import 'package:global_explorer/features/favorites/presentation/cubit/favorites_state.dart';
 
 import '../../../helpers/mock_country.dart';
-
-class MockFavoritesRepository extends Mock implements FavoritesRepository {}
+import '../../../helpers/test_helpers.dart';
 
 void main() {
   setUpAll(() => registerFallbackValue(tCountry));
